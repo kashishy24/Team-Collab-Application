@@ -18,10 +18,10 @@ const app = express();
 const httpServer = createServer(app);
 
 const io = new Server(httpServer, {
-  cors: { origin: process.env.CLIENT_ORIGIN || 'http://localhost:5173', methods: ['GET', 'POST'] },
+  cors: { origin: [process.env.CLIENT_ORIGIN, 'http://localhost:5173'], methods: ['GET', 'POST'] },
 });
 
-app.use(cors({ origin: process.env.CLIENT_ORIGIN || 'http://localhost:5173', credentials: true }));
+app.use(cors({ origin: [process.env.CLIENT_ORIGIN, 'http://localhost:5173'], credentials: true }));
 app.use(express.json());
 
 app.use('/api/auth', authRoutes);
