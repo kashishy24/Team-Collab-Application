@@ -24,7 +24,15 @@ export default function Login() {
       }
       navigate('/', { replace: true });
     } catch (err) {
-      setError(err.response?.data?.error || err.message || 'Authentication failed');
+      let errorMessage = 'Authentication failed';
+      if (err.code === 'ERR_NETWORK' || err.message.includes('Network')) {
+        errorMessage = 'Unable to connect to server. Please check your connection and try again.';
+      } else if (err.response?.data?.error) {
+        errorMessage = err.response.data.error;
+      } else if (err.message) {
+        errorMessage = err.message;
+      }
+      setError(errorMessage);
     } finally {
       setLoading(false);
     }
