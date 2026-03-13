@@ -21,11 +21,15 @@ const io = new Server(httpServer, {
   cors: { origin: [process.env.CLIENT_ORIGIN, 'http://localhost:5173'], methods: ['GET', 'POST'] },
 });
 
+import cors from "cors";
+
 app.use(cors({
   origin: [
-    process.env.CLIENT_ORIGIN,
+    "https://team-collab-application-wt9m-h2j9f7gge.vercel.app",
     "http://localhost:5173"
   ],
+  methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
+  origin: true,
   credentials: true
 }));
 app.use(express.json());
